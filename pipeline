@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('run collection') {
+            steps {
+                // Clone the GitHub repository
+                git branch: 'main', url: 'https://github.com/jnsob/jenkins_test.git'
+            }
+        }
+        
+        stage('Run Postman tests') {
+            steps {
+                // Install Newman (Postman command line tool)
+                sh 'npm install -g newman'
+                
+                // Run the Postman tests
+                sh 'newman run Register.json --environment postman_environment.json'
+            }
+        }
+    }
+}
