@@ -12,10 +12,10 @@ pipeline {
         stage('Run Postman tests') {
             steps {
                 // Install Newman (Postman command line tool)
-                sh 'npm install -g newman'
+                git-bash 'npm install -g newman'
                 
                 // Run the Postman tests
-                sh 'newman run Register.json --environment postman_environment.json'
+                git-bash 'newman run Register.json --environment postman_environment.json'
             }
         }
     }
