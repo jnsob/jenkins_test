@@ -12,10 +12,10 @@ pipeline {
         stage('Run Postman tests') {
             steps {
                 // Install Newman (Postman command line tool)
-                sh 'docker run -t postman/newman run -h'
+                sh 'npm install -g newman'
                 
                 // Run the Postman tests
-                sh 'docker run -v ${WORKSPACE}:/etc/newman --workdir /etc/newman -t /postman/newman Register.json --environment postman_environment.json'
+                sh 'newman run Register.json --environment postman_environment.json'
             }
         }
     }
